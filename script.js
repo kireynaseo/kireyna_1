@@ -222,13 +222,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const resLoanLtv = document.getElementById('res-loan-ltv');
   const resLoanAmount = document.getElementById('res-loan-amount');
 
-  // Consultation form
-  const consultForm = document.getElementById('consultation-form');
+  // Toast notification elements
   const toast = document.getElementById('toast-notification');
   const toastMsg = document.getElementById('toast-message');
 
   // Bookmark page btn
   const bookmarkBtn = document.getElementById('bookmark-page-btn');
+
+  // KakaoTalk AI Chatbot DOM elements
+  const kakaoToggleBtn = document.getElementById('kakao-ai-toggle-btn');
+  const kakaoChatWindow = document.getElementById('kakao-ai-chat-window');
+  const kakaoMinimizeBtn = document.getElementById('kakao-chat-minimize');
+  const kakaoCloseBtn = document.getElementById('kakao-chat-close');
+  const kakaoChatMessages = document.getElementById('kakao-chat-messages');
+  const kakaoChatForm = document.getElementById('kakao-chat-form');
+  const kakaoChatInput = document.getElementById('kakao-chat-input');
+  const aiTypingIndicator = document.getElementById('ai-typing-indicator');
+  const initMsgTime = document.getElementById('init-msg-time');
 
   // ================= 3. RENDER PROPERTY CARDS =================
   function renderProperties() {
@@ -497,12 +507,35 @@ document.addEventListener('DOMContentLoaded', () => {
       btnInquire.addEventListener('click', () => {
         closeModal();
         const contactSec = document.getElementById('contact-section');
-        contactSec.scrollIntoView({ behavior: 'smooth' });
-        const msgInput = document.getElementById('user-message');
-        if (msgInput) {
-          msgInput.value = `[매물 문의] ${item.title} (${item.priceDisplay})에 대해 궁금합니다.`;
-          msgInput.focus();
+        if (contactSec) {
+          contactSec.scrollIntoView({ behavior: 'smooth' });
         }
+        // Switch to buy tab
+        switchInquiryTab('tab-buy');
+        const buyMsgInput = document.getElementById('buy-message');
+        if (buyMsgInput) {
+          buyMsgInput.value = `[추천 매물 상담 신청] ${item.title} (${item.transType} ${item.priceDisplay})에 대해 상세 상담을 희망합니다.`;
+        }
+        const buyDistrict = document.getElementById('buy-district');
+        if (buyDistrict && item.district) {
+          for (let option of buyDistrict.options) {
+            if (option.value.includes(item.district)) {
+              buyDistrict.value = option.value;
+              break;
+            }
+          }
+        }
+        const buyPropType = document.getElementById('buy-property-type');
+        if (buyPropType && item.category) {
+          for (let option of buyPropType.options) {
+            if (option.value.includes(item.category) || item.category.includes(option.value)) {
+              buyPropType.value = option.value;
+              break;
+            }
+          }
+        }
+        const buyNameInput = document.getElementById('buy-name');
+        if (buyNameInput) buyNameInput.focus();
       });
     }
   }
@@ -615,15 +648,432 @@ document.addEventListener('DOMContentLoaded', () => {
     loanResultBox.classList.remove('hidden');
   });
 
-  // ================= 8. CONSULTATION FORM SUBMISSION =================
-  consultForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const userName = document.getElementById('user-name').value;
-    const userPhone = document.getElementById('user-phone').value;
+  // ================= 8. INQUIRY SECTION & MULTI-TAB LOGIC =================
+  // 1. Tab Switching
+  const inquiryTabs = document.querySelectorAll('.inquiry-tab');
+  const inquiryPanels = document.querySelectorAll('.inquiry-form-panel');
 
-    showToast(`[접수 완료] ${userName} 고객님, 10분 내로 전문 중개사가 연락드리겠습니다!`);
-    consultForm.reset();
+  window.switchInquiryTab = function(tabId) {
+    inquiryTabs.forEach(tab => {
+      if (tab.dataset.tab === tabId) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+
+    inquiryPanels.forEach(panel => {
+      if (panel.id === `form-inquiry-${tabId.replace('tab-', '')}`) {
+        panel.classList.add('active');
+      } else {
+        panel.classList.remove('active');
+      }
+    });
+  };
+
+  inquiryTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      switchInquiryTab(tab.dataset.tab);
+    });
   });
+
+  // 2. Choice Chips
+  setupSingleChoiceChips('#buy-trans-chips', '#buy-trans-type-val');
+  setupSingleChoiceChips('#sell-type-chips', '#sell-type-val');
+  setupSingleChoiceChips('#visit-topic-chips', '#visit-topic-val', 'topic');
+  setupSingleChoiceChips('#time-slot-chips', '#visit-time-val', 'time');
+
+  function setupSingleChoiceChips(containerSelector, hiddenInputSelector, dataKey = 'value') {
+    const container = document.querySelector(containerSelector);
+    const hiddenInput = document.querySelector(hiddenInputSelector);
+    if (!container || !hiddenInput) return;
+
+    const chips = container.querySelectorAll('button');
+    chips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        hiddenInput.value = chip.dataset[dataKey] || chip.textContent.trim();
+      });
+    });
+  }
+
+  // 3. Preference Chips (선호 조건 토글)
+  const prefChips = document.querySelectorAll('#buy-pref-tags .pref-chip');
+  prefChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('active');
+    });
+  });
+
+  // 4. Phone Number Auto-Formatting (010-XXXX-XXXX)
+  const phoneInputs = document.querySelectorAll('.phone-input');
+  phoneInputs.forEach(input => {
+    input.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/[^0-9]/g, '');
+      if (val.length > 11) val = val.slice(0, 11);
+      
+      let formatted = val;
+      if (val.length > 7) {
+        formatted = `${val.slice(0, 3)}-${val.slice(3, 7)}-${val.slice(7)}`;
+      } else if (val.length > 3) {
+        formatted = `${val.slice(0, 3)}-${val.slice(3)}`;
+      }
+      e.target.value = formatted;
+    });
+  });
+
+  // 5. Visit Date minimum = today
+  const visitDateInput = document.getElementById('visit-date');
+  if (visitDateInput) {
+    const todayStr = new Date().toISOString().split('T')[0];
+    visitDateInput.min = todayStr;
+    visitDateInput.value = todayStr;
+  }
+
+  // 6. Live Activity Ticker Animation Loop
+  const tickerContainer = document.getElementById('live-ticker-content');
+  if (tickerContainer) {
+    const tickerItems = [
+      { area: "[철산동]", client: "김*수 고객님 (010-****-4820)", desc: "아파트 매수 및 급매 상담 접수 완료", time: "방금 전" },
+      { area: "[일직동]", client: "최*진 고객님 (010-****-1983)", desc: "광명역 KTX 역세권 전세 상담 신청", time: "3분 전" },
+      { area: "[광명동]", client: "박*호 고객님 (010-****-6214)", desc: "11구역 조합원 입주권 방문 예약", time: "8분 전" },
+      { area: "[하안동]", client: "정*선 고객님 (010-****-3351)", desc: "하안주공 12단지 매도 의뢰 등록", time: "15분 전" },
+      { area: "[소하동]", client: "이*영 고객님 (010-****-8829)", desc: "신촌휴먼시아 월세 매물 문의", time: "22분 전" },
+      { area: "[철산동]", client: "한*우 고객님 (010-****-7512)", desc: "푸르지오 신축 전세 자금대출 상담", time: "31분 전" }
+    ];
+    let tickerIndex = 0;
+    setInterval(() => {
+      tickerIndex = (tickerIndex + 1) % tickerItems.length;
+      const item = tickerItems[tickerIndex];
+      tickerContainer.innerHTML = `
+        <span class="ticker-text"><strong class="ticker-area">${item.area}</strong> ${item.client} — ${item.desc} <span class="ticker-time">${item.time}</span></span>
+      `;
+    }, 4000);
+  }
+
+  // 7. Modals: Success Receipt Modal
+  const successModal = document.getElementById('inquiry-success-modal');
+  const successModalCloseBtn = document.getElementById('inquiry-modal-close-btn');
+  const btnReceiptConfirm = document.getElementById('btn-receipt-confirm');
+  const btnReceiptKakaoChat = document.getElementById('btn-receipt-kakao-chat');
+
+  function openReceiptModal(receiptData) {
+    document.getElementById('receipt-id').textContent = receiptData.id;
+    document.getElementById('receipt-type').textContent = receiptData.type;
+    document.getElementById('receipt-name').textContent = `${receiptData.name} 고객님`;
+    
+    // Mask phone number: 010-1234-5678 -> 010-****-5678
+    const phone = receiptData.phone;
+    let maskedPhone = phone;
+    const parts = phone.split('-');
+    if (parts.length === 3) {
+      maskedPhone = `${parts[0]}-****-${parts[2]}`;
+    }
+    document.getElementById('receipt-phone').textContent = maskedPhone;
+    document.getElementById('receipt-time').textContent = receiptData.time;
+
+    const emailStatusEl = document.getElementById('receipt-email-status');
+    if (emailStatusEl) {
+      if (receiptData.emailSent) {
+        emailStatusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669;"></i> Resend 알림 발송 완료 (${receiptData.resendId ? receiptData.resendId.slice(0, 8) + '...' : '전송됨'})`;
+        emailStatusEl.style.color = '#059669';
+      } else if (receiptData.emailPending) {
+        emailStatusEl.innerHTML = `<i class="fa-solid fa-spinner fa-spin" style="color: #2563EB;"></i> Resend 이메일 발송 중...`;
+        emailStatusEl.style.color = '#2563EB';
+      } else {
+        emailStatusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669;"></i> 시스템 접수 완료`;
+        emailStatusEl.style.color = '#059669';
+      }
+    }
+
+    successModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeReceiptModal() {
+    successModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  if (successModalCloseBtn) successModalCloseBtn.addEventListener('click', closeReceiptModal);
+  if (btnReceiptConfirm) btnReceiptConfirm.addEventListener('click', closeReceiptModal);
+  if (btnReceiptKakaoChat) {
+    btnReceiptKakaoChat.addEventListener('click', () => {
+      closeReceiptModal();
+      if (kakaoChatWindow) {
+        kakaoChatWindow.classList.remove('hidden');
+        kakaoChatInput.focus();
+      }
+    });
+  }
+
+  // 8. Form Submission Handlers for all 4 forms (Resend API Connected)
+  const inquiryForms = [
+    document.getElementById('form-inquiry-buy'),
+    document.getElementById('form-inquiry-sell'),
+    document.getElementById('form-inquiry-visit'),
+    document.getElementById('form-inquiry-quick')
+  ];
+
+  inquiryForms.forEach(form => {
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formType = form.dataset.type || '1:1 맞춤 상담';
+      let clientName = '';
+      let clientPhone = '';
+      let summaryText = '';
+      const details = {};
+
+      if (form.id === 'form-inquiry-buy') {
+        clientName = document.getElementById('buy-name').value.trim();
+        clientPhone = document.getElementById('buy-phone').value.trim();
+        const transType = document.getElementById('buy-trans-type-val').value;
+        const propType = document.getElementById('buy-property-type').value;
+        const district = document.getElementById('buy-district').value;
+        const budget = document.getElementById('buy-budget').value;
+        const movein = document.getElementById('buy-movein').value;
+        const memo = document.getElementById('buy-message').value.trim();
+        const activeTags = Array.from(form.querySelectorAll('#buy-pref-tags .pref-chip.active')).map(el => el.textContent.trim());
+
+        details['상담 구분'] = transType;
+        details['부동산 유형'] = propType;
+        details['희망 지역'] = district;
+        details['희망 예산'] = budget;
+        details['입주 시기'] = movein;
+        if (activeTags.length) details['선호 조건'] = activeTags.join(', ');
+        if (memo) details['상세 문의 내용'] = memo;
+
+        summaryText = `[${transType}/${propType}] ${district} (예산: ${budget})`;
+      } else if (form.id === 'form-inquiry-sell') {
+        clientName = document.getElementById('sell-name').value.trim();
+        clientPhone = document.getElementById('sell-phone').value.trim();
+        const sellType = document.getElementById('sell-type-val').value;
+        const propType = document.getElementById('sell-property-type').value;
+        const location = document.getElementById('sell-location').value.trim();
+        const area = document.getElementById('sell-area').value.trim();
+        const price = document.getElementById('sell-price').value.trim();
+        const status = document.getElementById('sell-status').value;
+        const confidential = document.getElementById('sell-confidential').checked ? '비공개 중개 요청' : '일반 공개';
+        const memo = document.getElementById('sell-message').value.trim();
+
+        details['의뢰 구분'] = sellType;
+        details['부동산 유형'] = propType;
+        details['매물 위치'] = location;
+        if (area) details['평형/면적'] = area;
+        details['희망 가격'] = price;
+        details['입주 상태'] = status;
+        details['보안 옵션'] = confidential;
+        if (memo) details['수리/매물 특징'] = memo;
+
+        summaryText = `[${sellType}] ${location} (희망가: ${price})`;
+      } else if (form.id === 'form-inquiry-visit') {
+        clientName = document.getElementById('visit-name').value.trim();
+        clientPhone = document.getElementById('visit-phone').value.trim();
+        const date = document.getElementById('visit-date').value;
+        const time = document.getElementById('visit-time-val').value;
+        const topic = document.getElementById('visit-topic-val').value;
+        const people = document.getElementById('visit-people').value;
+        const vehicle = document.getElementById('visit-vehicle').value;
+        const memo = document.getElementById('visit-memo').value.trim();
+
+        details['상담 희망 주제'] = topic;
+        details['방문 희망 날짜'] = date;
+        details['방문 희망 시간'] = time;
+        details['방문 인원'] = people;
+        details['주차 지원 여부'] = vehicle;
+        if (memo) details['사전 준비 요청'] = memo;
+
+        summaryText = `[방문예약] ${date} ${time} (${topic})`;
+      } else if (form.id === 'form-inquiry-quick') {
+        clientName = document.getElementById('quick-name').value.trim();
+        clientPhone = document.getElementById('quick-phone').value.trim();
+        const category = document.getElementById('quick-category').value;
+        const callTime = document.getElementById('quick-call-time').value;
+        const memo = document.getElementById('quick-simple-note').value.trim();
+
+        details['관심 상담 분야'] = category;
+        details['통화 희망 시간대'] = callTime;
+        if (memo) details['간단 문의'] = memo;
+
+        summaryText = `[스피드요청] ${category} (희망시간: ${callTime})`;
+      }
+
+      // Generate Receipt
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      const receiptId = `GL-${y}${m}${d}-${randomNum}`;
+      const timeStr = `${y}.${m}.${d} ${hh}:${mm}`;
+
+      const receiptRecord = {
+        id: receiptId,
+        type: formType,
+        name: clientName,
+        phone: clientPhone,
+        summary: summaryText,
+        time: timeStr,
+        emailPending: true,
+        emailSent: false
+      };
+
+      // Button Loading UI
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const origBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 접수 및 메일 전송 중...`;
+      }
+
+      // Send to Resend API via Relay
+      const emailPayload = {
+        id: receiptId,
+        type: formType,
+        name: clientName,
+        phone: clientPhone,
+        summary: summaryText,
+        time: timeStr,
+        details: details
+      };
+
+      fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(emailPayload)
+      })
+      .then(res => res.json())
+      .then(result => {
+        console.log('[Resend API Result]:', result);
+        if (result && result.success) {
+          receiptRecord.emailSent = true;
+          receiptRecord.emailPending = false;
+          receiptRecord.resendId = result.id;
+          const emailStatusEl = document.getElementById('receipt-email-status');
+          if (emailStatusEl) {
+            emailStatusEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #059669;"></i> Resend 알림 발송 완료 (${result.id ? result.id.slice(0, 8) + '...' : '전달됨'})`;
+            emailStatusEl.style.color = '#059669';
+          }
+        } else {
+          receiptRecord.emailPending = false;
+          console.warn('Resend response was not successful:', result);
+        }
+      })
+      .catch(err => {
+        console.warn('Email dispatch relay notice:', err);
+        receiptRecord.emailPending = false;
+      })
+      .finally(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origBtnHtml;
+        }
+      });
+
+      // Save to localStorage
+      const existingInquiries = JSON.parse(localStorage.getItem('gwangmyeong_inquiries') || '[]');
+      existingInquiries.unshift(receiptRecord);
+      localStorage.setItem('gwangmyeong_inquiries', JSON.stringify(existingInquiries.slice(0, 10)));
+
+      // Open Modal
+      openReceiptModal(receiptRecord);
+      showToast(`[접수 완료] ${clientName} 고객님, 10분 내로 전문 중개사가 연락드립니다!`);
+      form.reset();
+
+      // Reset chips default
+      const defaultChips = form.querySelectorAll('.choice-chip');
+      if (defaultChips.length > 0) {
+        defaultChips.forEach((c, idx) => {
+          if (idx === 0) c.classList.add('active');
+          else c.classList.remove('active');
+        });
+      }
+    });
+  });
+
+  // 9. Privacy Policy Modal
+  const privacyModal = document.getElementById('privacy-policy-modal');
+  const privacyModalCloseBtn = document.getElementById('privacy-modal-close-btn');
+  const btnPrivacyAgreeConfirm = document.getElementById('btn-privacy-agree-confirm');
+  const privacyViewBtns = document.querySelectorAll('.btn-privacy-view');
+
+  privacyViewBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (privacyModal) {
+        privacyModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  function closePrivacyModal() {
+    if (privacyModal) {
+      privacyModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  if (privacyModalCloseBtn) privacyModalCloseBtn.addEventListener('click', closePrivacyModal);
+  if (btnPrivacyAgreeConfirm) btnPrivacyAgreeConfirm.addEventListener('click', closePrivacyModal);
+
+  // 10. History Modal (나의 최근 상담 신청 내역)
+  const historyModal = document.getElementById('my-inquiries-modal');
+  const historyModalCloseBtn = document.getElementById('history-modal-close-btn');
+  const btnCloseHistoryModal = document.getElementById('btn-close-history-modal');
+  const btnViewMyInquiries = document.getElementById('btn-view-my-inquiries');
+  const historyListContainer = document.getElementById('history-list-container');
+
+  if (btnViewMyInquiries && historyModal && historyListContainer) {
+    btnViewMyInquiries.addEventListener('click', () => {
+      const records = JSON.parse(localStorage.getItem('gwangmyeong_inquiries') || '[]');
+      if (records.length === 0) {
+        historyListContainer.innerHTML = `
+          <div class="h-empty">
+            <i class="fa-regular fa-folder-open" style="font-size:2rem; margin-bottom:8px; display:block;"></i>
+            최근 신청하신 상담 내역이 없습니다.<br>
+            위 상담 신청서를 통해 언제든 편하게 문의해 주세요!
+          </div>
+        `;
+      } else {
+        historyListContainer.innerHTML = records.map(rec => `
+          <div class="history-item-card">
+            <div class="h-top">
+              <span class="h-type">${escapeHtml(rec.type)} (${escapeHtml(rec.id)})</span>
+              <span class="h-date">${escapeHtml(rec.time)}</span>
+            </div>
+            <p class="h-summary"><strong>신청자:</strong> ${escapeHtml(rec.name)} / <strong>내용:</strong> ${escapeHtml(rec.summary)}</p>
+          </div>
+        `).join('');
+      }
+
+      historyModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeHistoryModal() {
+      historyModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    if (historyModalCloseBtn) historyModalCloseBtn.addEventListener('click', closeHistoryModal);
+    if (btnCloseHistoryModal) btnCloseHistoryModal.addEventListener('click', closeHistoryModal);
+  }
+
+  // 11. Left Sidebar Direct Kakao Launch
+  const btnLaunchKakaoContact = document.getElementById('btn-launch-kakao-contact');
+  if (btnLaunchKakaoContact && kakaoChatWindow) {
+    btnLaunchKakaoContact.addEventListener('click', () => {
+      kakaoChatWindow.classList.remove('hidden');
+      kakaoChatInput.focus();
+      showToast("카카오톡 1:1 라이브 AI 상담 창이 열렸습니다! 😊");
+    });
+  }
 
   // Bookmark page button
   if (bookmarkBtn) {
@@ -642,16 +1092,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================= 9. KAKAOTALK AI CHATBOT LOGIC =================
-  const kakaoToggleBtn = document.getElementById('kakao-ai-toggle-btn');
-  const kakaoChatWindow = document.getElementById('kakao-ai-chat-window');
-  const kakaoMinimizeBtn = document.getElementById('kakao-chat-minimize');
-  const kakaoCloseBtn = document.getElementById('kakao-chat-close');
-  const kakaoChatMessages = document.getElementById('kakao-chat-messages');
-  const kakaoChatForm = document.getElementById('kakao-chat-form');
-  const kakaoChatInput = document.getElementById('kakao-chat-input');
-  const aiTypingIndicator = document.getElementById('ai-typing-indicator');
-  const initMsgTime = document.getElementById('init-msg-time');
-
   if (initMsgTime) {
     const now = new Date();
     initMsgTime.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
@@ -794,16 +1234,27 @@ document.addEventListener('DOMContentLoaded', () => {
               • <strong>주차</strong>: 건물 지하 주차장 <strong>2시간 무료 주차</strong> 지원! 편하게 차량으로 방문하세요.`;
     }
 
+    if (q.includes('오픈') || q.includes('카카오') || q.includes('카톡') || q.includes('톡') || q.includes('채팅')) {
+      return `💬 <strong>대표 공인중개사 1:1 카카오 오픈채팅방</strong><br><br>
+              전화가 부담스러우실 때, 실시간 1:1 질의응답 및 사진/매물 자료를 간편하게 받아보실 수 있습니다! 😊<br><br>
+              <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="chat-openchat-card-btn">
+                <i class="fa-solid fa-comment-dots"></i> 1:1 카카오 오픈채팅방 입장하기 &rarr;
+              </a>`;
+    }
+
     if (q.includes('전화') || q.includes('상담') || q.includes('연락') || q.includes('대표')) {
       return `📞 <strong>광명리더스 직통 상담 연결</strong><br><br>
-              • 대표전화: <a href="tel:01048208888" style="color:#0F2C59; font-weight:bold; text-decoration:underline;">010-4820-8888</a><br>
-              • 대표중개사 직통: <a href="tel:01048208888" style="color:#0F2C59; font-weight:bold; text-decoration:underline;">010-4820-8888</a><br><br>
-              영업시간: 평일 09:00 - 20:00 (주말/공휴일 정상영업)입니다. 지금 바로 전화 연결 가능합니다!`;
+              • 대표 직통전화: <a href="tel:01048208888" style="color:#0F2C59; font-weight:bold; text-decoration:underline;">010-4820-8888</a><br>
+              • 실시간 오픈채팅: <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" style="color:#3C1E1E; font-weight:800; background:#FEE500; padding:2px 8px; border-radius:4px; text-decoration:none;">💬 오픈채팅 입장</a><br><br>
+              <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="chat-openchat-card-btn">
+                <i class="fa-solid fa-comments"></i> 대표 중개사 1:1 오픈톡 바로가기 &rarr;
+              </a>`;
     }
 
     return `문의해 주셔서 감사합니다! 😊<br>
             고객님께서 찾으시는 <strong>'${escapeHtml(query)}'</strong> 조건에 적합한 최적의 실매물을 빠르게 찾아드리겠습니다.<br><br>
-            자세한 1:1 친절 상담은 대표번호 📞 <strong>010-4820-8888</strong> 로 전화주시거나, 아래 <strong>1:1 상담 신청 폼</strong>을 작성해 주시면 10분 내로 연락드리겠습니다!`;
+            💬 실시간 1:1 카톡 상담: <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" style="color:#0F2C59; font-weight:bold; text-decoration:underline;">오픈채팅방 바로입장</a><br>
+            📞 대표 직통전화: <a href="tel:01048208888" style="color:#0F2C59; font-weight:bold; text-decoration:underline;">010-4820-8888</a>`;
   }
 
   function scrollToBottomChat() {

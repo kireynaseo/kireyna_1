@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261013v6">
 </head>
 <body>
 
@@ -436,120 +436,611 @@
     </div>
   </section>
 
-  <!-- ================= CONSULTATION / INQUIRY FORM ================= -->
+  <!-- ================= CONSULTATION & INQUIRY SECTION ================= -->
   <section class="section contact-section bg-navy text-white" id="contact-section">
     <div class="container">
-      <div class="contact-wrapper">
-        <div class="contact-info-col">
-          <div class="section-badge badge-light">FAST CONSULTING</div>
-          <h2 class="contact-title">
-            매물 문의 및 맞춤 상담 신청
-          </h2>
-          <p class="contact-desc">
-            원하시는 지역, 금액대, 이사 일정을 남겨주시면 <strong>10분 이내</strong>에 전담 공인중개사가 최적의 매물 리스트를 준비하여 빠른 전화 상담을 드립니다.
-          </p>
+      <!-- Section Header -->
+      <div class="contact-header text-center">
+        <div class="section-badge badge-gold">PREMIUM REAL ESTATE CONSULTATION</div>
+        <h2 class="contact-main-title">
+          광명리더스 <span class="highlight-gold">1:1 맞춤 상담</span> & 매물 간편 의뢰
+        </h2>
+        <p class="contact-main-desc">
+          원하시는 맞춤 매물 찾기부터 내 집 매도·임대 접수, 현장 동행 방문 예약까지<br class="pc-only">
+          15년 경력 대표 공인중개사가 <strong>10분 이내</strong>에 신속하고 정직하게 1:1 전문 상담을 드립니다.
+        </p>
 
-          <div class="quick-contact-boxes">
-            <div class="q-box">
-              <i class="fa-solid fa-phone-volume"></i>
+        <!-- Trust Highlights Banner -->
+        <div class="trust-pills-row">
+          <div class="trust-pill"><i class="fa-solid fa-bolt-lightning"></i> 10분 내 빠른 해피콜</div>
+          <div class="trust-pill"><i class="fa-solid fa-user-shield"></i> 100% 철저한 비공개 보장</div>
+          <div class="trust-pill"><i class="fa-solid fa-certificate"></i> 허위매물 0% 현장검증 실매물</div>
+          <div class="trust-pill"><i class="fa-solid fa-hand-holding-dollar"></i> 취득·양도세 & 대출 사전 절세 검토</div>
+        </div>
+      </div>
+
+      <!-- Live Consultation Activity Ticker -->
+      <div class="consultation-live-ticker">
+        <div class="ticker-badge">
+          <span class="live-dot"></span> LIVE 접수현황
+        </div>
+        <div class="ticker-content" id="live-ticker-content">
+          <span class="ticker-text"><strong class="ticker-area">[철산동]</strong> 김*수 고객님 (010-****-4820) — 아파트 매수 및 급매 상담 접수 완료 <span class="ticker-time">방금 전</span></span>
+        </div>
+        <div class="ticker-stat">
+          <i class="fa-solid fa-users"></i> 오늘 접수 <strong>28건</strong>
+        </div>
+      </div>
+
+      <!-- Main Contact Grid -->
+      <div class="contact-grid-container">
+        <!-- Left: Quick Direct Channels & Broker Info -->
+        <div class="contact-sidebar">
+          <!-- Direct Call Box -->
+          <div class="contact-direct-card phone-card">
+            <div class="direct-card-top">
+              <div class="pulse-indicator">
+                <span class="pulse-circle"></span>
+                <span class="pulse-text">상담 통화 가능</span>
+              </div>
+              <span class="card-tag">직통 핫라인</span>
+            </div>
+            <div class="direct-body">
+              <span class="direct-label">대표 공인중개사 직통 전화</span>
+              <a href="tel:01048208888" class="direct-phone-number">010-4820-8888</a>
+              <p class="direct-sub">평일/주말 09:00 ~ 20:00 (야간 문자 접수 가능)</p>
+            </div>
+            <a href="tel:01048208888" class="btn btn-direct-call">
+              <i class="fa-solid fa-phone-volume"></i> 지금 바로 전화 연결하기
+            </a>
+          </div>
+
+          <!-- KakaoTalk Real-Time Chat Banner -->
+          <div class="contact-direct-card kakao-card">
+            <div class="kakao-card-header">
+              <div class="kakao-badge-icon"><i class="fa-solid fa-comment"></i></div>
               <div>
-                <span class="q-label">대표 전화 문의</span>
-                <a href="tel:01048208888" class="q-val">010-4820-8888</a>
+                <h4>카카오톡 1:1 실시간 상담</h4>
+                <p>전화가 부담스러울 땐 메신저로 간편하게!</p>
               </div>
             </div>
-
-            <div class="q-box">
-              <i class="fa-solid fa-comments"></i>
-              <div>
-                <span class="q-label">카카오톡 1:1 오픈상담</span>
-                <span class="q-val">@광명리더스부동산</span>
-              </div>
+            <div class="kakao-channel-info">
+              <span>공식 오픈채팅: <strong>광명리더스 1:1 실시간 상담방</strong></span>
             </div>
-
-            <div class="q-box">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <div>
-                <span class="q-label">사무실 방문 안내</span>
-                <span class="q-val-sub">7호선 철산역 1번 출구 도보 3분 (건물 내 무료 주차 가능)</span>
-              </div>
+            <div class="kakao-card-actions">
+              <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="btn btn-kakao-action" id="btn-open-kakao-direct">
+                <i class="fa-solid fa-comments"></i> 1:1 오픈채팅방 바로 입장하기
+              </a>
+              <button type="button" class="btn btn-kakao-ai-toggle" id="btn-launch-kakao-contact">
+                <i class="fa-solid fa-robot"></i> 24시간 AI 부동산 비서 상담창 열기
+              </button>
             </div>
           </div>
+
+          <!-- SMS Quick Card -->
+          <div class="contact-direct-card sms-card">
+            <div class="sms-content">
+              <div class="sms-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+              <div class="sms-info">
+                <h4>문자(SMS) 간편 문의</h4>
+                <p>010-4820-8888 번호로 희망 조건을 문자로 남겨주시면 바로 답장드립니다.</p>
+              </div>
+            </div>
+            <a href="sms:01048208888?body=%EA%B4%91%EB%AA%85%EB%A6%AC%EB%8D%94%EC%8A%A4%20%EB%B6%80%EB%8F%99%EC%82%B0%20%EB%A7%A4%EB%AC%BC%20%EB%AC%B8%EC%9D%98%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4." class="btn btn-sms-action">
+              <i class="fa-solid fa-paper-plane"></i> 문자 메시지 보내기
+            </a>
+          </div>
+
+          <!-- Office Visit & Free Parking Info -->
+          <div class="contact-office-card">
+            <div class="office-header">
+              <i class="fa-solid fa-location-dot"></i>
+              <h4>사무소 방문 및 무료 주차 안내</h4>
+            </div>
+            <ul class="office-list">
+              <li><i class="fa-solid fa-subway"></i> 7호선 철산역 1번 출구 도보 3분</li>
+              <li><i class="fa-solid fa-building"></i> 경기도 광명시 오리로 854 센트럴타워 1층 102호</li>
+              <li><i class="fa-solid fa-square-parking"></i> 건물 지하 주차장 <strong>2시간 무료 주차</strong> 지원</li>
+            </ul>
+          </div>
+
+          <!-- Recent Inquiry History Button -->
+          <button type="button" class="btn-check-history" id="btn-view-my-inquiries">
+            <i class="fa-solid fa-clock-rotate-left"></i> 최근 나의 상담 신청 내역 확인
+          </button>
         </div>
 
-        <!-- Interactive Form & Kakao Consultation Box on Right -->
-        <div class="contact-form-col">
-          <!-- KakaoTalk Right-Side Banner Box -->
-          <div class="kakao-right-box">
-            <div class="kakao-right-header">
-              <i class="fa-solid fa-comment"></i>
-              <div>
-                <h4>카카오톡 1:1 빠른 실시간 상담</h4>
-                <p>전화가 부담스러우실 땐 카카오톡으로 1초 만에 문의하세요!</p>
-              </div>
-            </div>
-            <button type="button" class="btn btn-kakao-launch" id="btn-launch-kakao-right">
-              <i class="fa-solid fa-comments"></i> 카카오톡 실시간 상담 시작하기 (@광명리더스부동산)
+        <!-- Right: Multi-tab Interactive Inquiry Forms -->
+        <div class="contact-main-form-box">
+          <!-- 4 Category Tabs -->
+          <div class="inquiry-tab-bar" id="inquiry-tab-bar" role="tablist">
+            <button type="button" class="inquiry-tab active" data-tab="tab-buy" role="tab">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+              <span>매물 구하기</span>
+              <small>매수 / 전월세</small>
+            </button>
+            <button type="button" class="inquiry-tab" data-tab="tab-sell" role="tab">
+              <i class="fa-solid fa-tag"></i>
+              <span>내 집 내놓기</span>
+              <small>매도 / 임대 의뢰</small>
+            </button>
+            <button type="button" class="inquiry-tab" data-tab="tab-visit" role="tab">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>방문 상담 예약</span>
+              <small>사무소 / 현장투어</small>
+            </button>
+            <button type="button" class="inquiry-tab" data-tab="tab-quick" role="tab">
+              <i class="fa-solid fa-bolt"></i>
+              <span>10초 빠른 접수</span>
+              <small>초간편 전화요청</small>
             </button>
           </div>
 
-          <form id="consultation-form" class="consultation-form">
-            <h3 class="form-heading"><i class="fa-solid fa-paper-plane"></i> 1:1 맞춤 상담 신청서</h3>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="user-name">성함 <span class="required">*</span></label>
-                <input type="text" id="user-name" required placeholder="예) 홍길동">
+          <!-- Forms Container -->
+          <div class="inquiry-forms-container">
+            <!-- TAB 1: 매물 구하기 Form -->
+            <form id="form-inquiry-buy" class="inquiry-form-panel active" data-type="매물 구하기">
+              <div class="panel-header">
+                <h3><i class="fa-solid fa-house-chimney-user"></i> 희망 매물 맞춤 검색 신청</h3>
+                <p>원하시는 조건을 알려주시면 광명시 전역 네트워크를 총동원하여 최적의 알짜 매물을 엄선해 드립니다.</p>
               </div>
-              <div class="form-group">
-                <label for="user-phone">연락처 <span class="required">*</span></label>
-                <input type="tel" id="user-phone" required placeholder="예) 010-1234-5678">
+
+              <!-- 1. 거래 유형 -->
+              <div class="form-group-block">
+                <label class="block-label">거래 방식 선택 <span class="required">*</span></label>
+                <div class="choice-chips" id="buy-trans-chips">
+                  <button type="button" class="choice-chip active" data-value="전체">전체</button>
+                  <button type="button" class="choice-chip" data-value="매매">매매</button>
+                  <button type="button" class="choice-chip" data-value="전세">전세</button>
+                  <button type="button" class="choice-chip" data-value="월세">월세</button>
+                </div>
+                <input type="hidden" name="buy_trans_type" id="buy-trans-type-val" value="전체">
               </div>
-            </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="consult-type">상담 구분 <span class="required">*</span></label>
-                <select id="consult-type" required>
-                  <option value="매수/임차">매수 / 전월세 구하기 (집 찾기)</option>
-                  <option value="매도/임대">매도 / 내놓기 (집 팔기)</option>
-                  <option value="시세/재개발">광명시 시세 & 재개발 상담</option>
-                  <option value="방문예약">사무소 직접 방문 상담 예약</option>
-                </select>
+              <!-- 2. 매물 유형 & 희망 지역 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="buy-property-type" class="block-label">매물 종류 <span class="required">*</span></label>
+                  <select id="buy-property-type" required>
+                    <option value="아파트">아파트</option>
+                    <option value="재개발/입주권">재개발 / 조합원 입주권</option>
+                    <option value="상가/오피스">상가 / 사무실</option>
+                    <option value="오피스텔">오피스텔</option>
+                    <option value="주택/빌라">주택 / 빌라</option>
+                    <option value="기타">기타 / 토지</option>
+                  </select>
+                </div>
+                <div class="form-group-block">
+                  <label for="buy-district" class="block-label">희망 지역 <span class="required">*</span></label>
+                  <select id="buy-district" required>
+                    <option value="광명시 전체">광명시 전체 (추천 요망)</option>
+                    <option value="철산동">철산동 (7호선 역세권)</option>
+                    <option value="하안동">하안동 (재건축 대단지)</option>
+                    <option value="소하동">소하동 (쾌적 숲세권·학군)</option>
+                    <option value="일직동">일직동 (KTX광명역세권)</option>
+                    <option value="광명동">광명동 (광명뉴타운 재개발)</option>
+                  </select>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="target-district">희망 지역</label>
-                <select id="target-district">
-                  <option value="철산동">철산동</option>
-                  <option value="하안동">하안동</option>
-                  <option value="소하동">소하동</option>
-                  <option value="일직동">일직동 (광명역)</option>
-                  <option value="광명동">광명동 (뉴타운)</option>
-                  <option value="상관없음">상관없음 / 추천요청</option>
-                </select>
+
+              <!-- 3. 예산대 & 입주 시기 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="buy-budget" class="block-label">희망 예산 (자금 계획)</label>
+                  <select id="buy-budget">
+                    <option value="협의가능">예산 협의 / 최적 매물 추천 요청</option>
+                    <option value="3억원 이하">3억원 이하</option>
+                    <option value="3억원 ~ 6억원">3억원 ~ 6억원</option>
+                    <option value="6억원 ~ 10억원">6억원 ~ 10억원</option>
+                    <option value="10억원 ~ 15억원">10억원 ~ 15억원</option>
+                    <option value="15억원 이상">15억원 이상 프리미엄</option>
+                  </select>
+                </div>
+                <div class="form-group-block">
+                  <label for="buy-movein" class="block-label">입주 희망 시기</label>
+                  <select id="buy-movein">
+                    <option value="협의가능">입주 시기 협의 가능</option>
+                    <option value="즉시입주">즉시 입주 희망</option>
+                    <option value="1개월 이내">1개월 이내</option>
+                    <option value="3개월 이내">3개월 이내</option>
+                    <option value="6개월 이내">6개월 이내 (여유 있음)</option>
+                    <option value="투자목적">실입주 아닌 갭투자/임대 목적</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label for="user-message">희망 조건 및 문의 내용</label>
-              <textarea id="user-message" rows="3" placeholder="희망 예산, 평형대, 입주 희망시기 등 원하시는 조건을 자유롭게 적어주세요."></textarea>
-            </div>
+              <!-- 4. 희망 키워드/특징 태그 -->
+              <div class="form-group-block">
+                <label class="block-label">선호 조건 (복수 선택 가능)</label>
+                <div class="pref-tag-chips" id="buy-pref-tags">
+                  <span class="pref-chip" data-pref="역세권도보"><i class="fa-solid fa-train-subway"></i> 역세권</span>
+                  <span class="pref-chip" data-pref="올수리확장"><i class="fa-solid fa-wand-magic-sparkles"></i> 올수리/확장</span>
+                  <span class="pref-chip" data-pref="로얄동층"><i class="fa-solid fa-sun"></i> 로얄동·남향</span>
+                  <span class="pref-chip" data-pref="초품아"><i class="fa-solid fa-graduation-cap"></i> 초품아·학군</span>
+                  <span class="pref-chip" data-pref="주차편리"><i class="fa-solid fa-square-parking"></i> 지하주차 직통</span>
+                  <span class="pref-chip" data-pref="대단지"><i class="fa-solid fa-city"></i> 1,000세대 대단지</span>
+                </div>
+              </div>
 
-            <div class="form-privacy">
-              <label class="checkbox-container">
-                <input type="checkbox" id="privacy-agree" required checked>
-                <span class="checkmark"></span>
-                <span>개인정보 수집 및 이용 동의 (상담 목적 외 사용 불가) <a href="#" id="view-privacy-link">[내용보기]</a></span>
-              </label>
-            </div>
+              <!-- 5. 상세 요청사항 -->
+              <div class="form-group-block">
+                <label for="buy-message" class="block-label">상세 문의 내용</label>
+                <textarea id="buy-message" rows="3" placeholder="예) 철산래미안 84타입 판상형 구조, 고층 남향 위주로 보고 싶습니다. 주담대 대출 가능 여부도 같이 상담 원합니다."></textarea>
+              </div>
 
-            <button type="submit" class="btn btn-submit-form w-100">
-              <i class="fa-solid fa-check"></i> 상담 신청 완료하기
-            </button>
-          </form>
+              <!-- 6. 고객 연락처 -->
+              <div class="form-row-2 client-info-row">
+                <div class="form-group-block">
+                  <label for="buy-name" class="block-label">성함 <span class="required">*</span></label>
+                  <input type="text" id="buy-name" required placeholder="예) 홍길동">
+                </div>
+                <div class="form-group-block">
+                  <label for="buy-phone" class="block-label">연락처 <span class="required">*</span></label>
+                  <input type="tel" id="buy-phone" class="phone-input" required placeholder="010-0000-0000" maxlength="13">
+                </div>
+              </div>
+
+              <!-- Privacy Check -->
+              <div class="privacy-agreement-row">
+                <label class="custom-checkbox-wrap">
+                  <input type="checkbox" id="buy-privacy" required checked>
+                  <span class="custom-checkmark"></span>
+                  <span class="privacy-text">개인정보 수집 및 이용에 동의합니다 (상담 완료 후 즉시 파기). <button type="button" class="btn-privacy-view">[전문 보기]</button></span>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-inquiry-submit">
+                <i class="fa-solid fa-paper-plane"></i> 맞춤 매물 리스트 상담 신청하기 (무료)
+              </button>
+            </form>
+
+            <!-- TAB 2: 내 집 내놓기 Form -->
+            <form id="form-inquiry-sell" class="inquiry-form-panel" data-type="내 집 내놓기">
+              <div class="panel-header">
+                <h3><i class="fa-solid fa-hand-holding-dollar"></i> 소중한 내 집, 빠르고 안전하게 매도·임대</h3>
+                <p>광명 전 지역 탄탄한 매수 대기 고객 풀을 통해 가장 유리한 최적 가격으로 신속하게 연결해 드립니다.</p>
+              </div>
+
+              <!-- 1. 의뢰 구분 -->
+              <div class="form-group-block">
+                <label class="block-label">의뢰 구분 <span class="required">*</span></label>
+                <div class="choice-chips" id="sell-type-chips">
+                  <button type="button" class="choice-chip active" data-value="매도 (팔기)">매도 (팔기)</button>
+                  <button type="button" class="choice-chip" data-value="전세 놓기">전세 놓기</button>
+                  <button type="button" class="choice-chip" data-value="월세 놓기">월세 놓기</button>
+                </div>
+                <input type="hidden" name="sell_type" id="sell-type-val" value="매도 (팔기)">
+              </div>
+
+              <!-- 2. 매물 위치 및 단지명 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="sell-property-type" class="block-label">부동산 유형 <span class="required">*</span></label>
+                  <select id="sell-property-type" required>
+                    <option value="아파트">아파트</option>
+                    <option value="재개발/입주권">재개발 / 조합원 입주권</option>
+                    <option value="상가/사무실">상가 / 점포 / 사무실</option>
+                    <option value="오피스텔">오피스텔</option>
+                    <option value="단독/다가구/빌라">단독 / 다가구 / 빌라</option>
+                  </select>
+                </div>
+                <div class="form-group-block">
+                  <label for="sell-location" class="block-label">매물 단지명 / 위치 <span class="required">*</span></label>
+                  <input type="text" id="sell-location" required placeholder="예) 철산래미안자이 103동, 하안주공 12단지">
+                </div>
+              </div>
+
+              <!-- 3. 평형 및 희망 금액 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="sell-area" class="block-label">평형 / 전용면적</label>
+                  <input type="text" id="sell-area" placeholder="예) 84㎡ (33평형), 59㎡ (25평형)">
+                </div>
+                <div class="form-group-block">
+                  <label for="sell-price" class="block-label">희망 가격 <span class="required">*</span></label>
+                  <input type="text" id="sell-price" required placeholder="예) 매매 10억 5,000만 / 보증금 5억">
+                </div>
+              </div>
+
+              <!-- 4. 거주 상태 & 비공개 중개 여부 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="sell-status" class="block-label">현재 입주 상태</label>
+                  <select id="sell-status">
+                    <option value="주인 거주 (협의 이사)">주인 거주 (협의 이사)</option>
+                    <option value="임차인 거주 (만기 승계)">임차인 거주 (만기 도래/임대 승계)</option>
+                    <option value="공실 (즉시 입주/인테리어 가능)">공실 (즉시 입주/인테리어 가능)</option>
+                  </select>
+                </div>
+                <div class="form-group-block">
+                  <label class="block-label">보안 비공개 중개 옵션</label>
+                  <label class="security-toggle-wrap">
+                    <input type="checkbox" id="sell-confidential">
+                    <span class="security-box"></span>
+                    <span class="security-text"><i class="fa-solid fa-lock"></i> 이웃/외부 비공개 진행 희망</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- 5. 매물 특징 및 메모 -->
+              <div class="form-group-block">
+                <label for="sell-message" class="block-label">수리 상태 및 매물 특징</label>
+                <textarea id="sell-message" rows="3" placeholder="예) 2년 전 샷시 포함 전체 올수리 완료, 로얄동 남향 햇살 좋습니다. 이사 협의 가능합니다."></textarea>
+              </div>
+
+              <!-- 6. 의뢰인 연락처 -->
+              <div class="form-row-2 client-info-row">
+                <div class="form-group-block">
+                  <label for="sell-name" class="block-label">성함 (소유주) <span class="required">*</span></label>
+                  <input type="text" id="sell-name" required placeholder="예) 이영희">
+                </div>
+                <div class="form-group-block">
+                  <label for="sell-phone" class="block-label">연락처 <span class="required">*</span></label>
+                  <input type="tel" id="sell-phone" class="phone-input" required placeholder="010-0000-0000" maxlength="13">
+                </div>
+              </div>
+
+              <!-- Privacy Check -->
+              <div class="privacy-agreement-row">
+                <label class="custom-checkbox-wrap">
+                  <input type="checkbox" id="sell-privacy" required checked>
+                  <span class="custom-checkmark"></span>
+                  <span class="privacy-text">개인정보 수집 및 이용에 동의합니다 (상담 완료 후 즉시 파기). <button type="button" class="btn-privacy-view">[전문 보기]</button></span>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-inquiry-submit">
+                <i class="fa-solid fa-key"></i> 내 집 매도·임대 접수 완료하기
+              </button>
+            </form>
+
+            <!-- TAB 3: 사무소 방문 상담 예약 Form -->
+            <form id="form-inquiry-visit" class="inquiry-form-panel" data-type="방문 상담 예약">
+              <div class="panel-header">
+                <h3><i class="fa-solid fa-calendar-days"></i> 대표 공인중개사 1:1 대면 방문 예약</h3>
+                <p>기다림 없이 쾌적한 VIP 상담실에서 광명시 권리분석, 재개발 투자, 현장 동행 답사를 편안하게 진행해 드립니다.</p>
+              </div>
+
+              <!-- 1. 상담 목적/주제 -->
+              <div class="form-group-block">
+                <label class="block-label">상담 희망 주제 <span class="required">*</span></label>
+                <div class="visit-topic-chips" id="visit-topic-chips">
+                  <button type="button" class="topic-chip active" data-topic="아파트 매수·갈아타기">아파트 실거주·갈아타기</button>
+                  <button type="button" class="topic-chip" data-topic="광명뉴타운 재개발 투자">광명뉴타운 재개발 투자</button>
+                  <button type="button" class="topic-chip" data-topic="보유 주택 매도·절세 컨설팅">보유 주택 매각·절세</button>
+                  <button type="button" class="topic-chip" data-topic="상가·수익형 부동산">상가·오피스텔 수익형</button>
+                  <button type="button" class="topic-chip" data-topic="현장 동행 답사 투어">매물 현장 동행 투어</button>
+                </div>
+                <input type="hidden" name="visit_topic" id="visit-topic-val" value="아파트 매수·갈아타기">
+              </div>
+
+              <!-- 2. 방문 희망일 & 시간대 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="visit-date" class="block-label">방문 희망 날짜 <span class="required">*</span></label>
+                  <input type="date" id="visit-date" required>
+                </div>
+                <div class="form-group-block">
+                  <label class="block-label">방문 희망 시간 <span class="required">*</span></label>
+                  <div class="time-slot-chips" id="time-slot-chips">
+                    <button type="button" class="time-chip" data-time="10:00">10:00</button>
+                    <button type="button" class="time-chip active" data-time="11:30">11:30</button>
+                    <button type="button" class="time-chip" data-time="14:00">14:00</button>
+                    <button type="button" class="time-chip" data-time="15:30">15:30</button>
+                    <button type="button" class="time-chip" data-time="17:00">17:00</button>
+                    <button type="button" class="time-chip" data-time="18:30">18:30</button>
+                  </div>
+                  <input type="hidden" name="visit_time" id="visit-time-val" value="11:30">
+                </div>
+              </div>
+
+              <!-- 3. 방문 인원 & 메모 -->
+              <div class="form-row-2">
+                <div class="form-group-block">
+                  <label for="visit-people" class="block-label">방문 인원</label>
+                  <select id="visit-people">
+                    <option value="1명">본인 1명</option>
+                    <option value="2명 (부부/가족)">2명 (부부 / 동반)</option>
+                    <option value="3인 이상 (가족)">3인 이상 가족 단위</option>
+                  </select>
+                </div>
+                <div class="form-group-block">
+                  <label for="visit-vehicle" class="block-label">주차 지원 여부</label>
+                  <select id="visit-vehicle">
+                    <option value="차량 방문 (지하 무료 주차 2시간)">차량 방문 (무료 주차 2시간 필요)</option>
+                    <option value="대중교통 (철산역 1번출구)">대중교통 이용 (지하철/도보)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group-block">
+                <label for="visit-memo" class="block-label">사전 준비 요청 및 질의사항</label>
+                <textarea id="visit-memo" rows="2" placeholder="사전에 검토해 주셨으면 하는 단지나 자금 계획, 궁금하신 점을 미리 남겨주시면 자료를 준비해 놓겠습니다."></textarea>
+              </div>
+
+              <!-- 4. 예약자 연락처 -->
+              <div class="form-row-2 client-info-row">
+                <div class="form-group-block">
+                  <label for="visit-name" class="block-label">예약자 성함 <span class="required">*</span></label>
+                  <input type="text" id="visit-name" required placeholder="예) 박준호">
+                </div>
+                <div class="form-group-block">
+                  <label for="visit-phone" class="block-label">연락처 <span class="required">*</span></label>
+                  <input type="tel" id="visit-phone" class="phone-input" required placeholder="010-0000-0000" maxlength="13">
+                </div>
+              </div>
+
+              <!-- Privacy Check -->
+              <div class="privacy-agreement-row">
+                <label class="custom-checkbox-wrap">
+                  <input type="checkbox" id="visit-privacy" required checked>
+                  <span class="custom-checkmark"></span>
+                  <span class="privacy-text">개인정보 수집 및 이용에 동의합니다 (상담 완료 후 즉시 파기). <button type="button" class="btn-privacy-view">[전문 보기]</button></span>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-inquiry-submit">
+                <i class="fa-solid fa-calendar-check"></i> 방문 상담 일정 예약 확정하기
+              </button>
+            </form>
+
+            <!-- TAB 4: 10초 스피드 간편 전화상담 Form -->
+            <form id="form-inquiry-quick" class="inquiry-form-panel" data-type="10초 빠른 전화상담">
+              <div class="panel-header quick-header">
+                <div class="quick-header-badge"><i class="fa-solid fa-bolt"></i> 10초 초간편 스피드 모드</div>
+                <h3>바쁘신 고객님을 위한 즉시 전화 상담 요청</h3>
+                <p>복잡한 입력 없이 <strong>성함과 연락처</strong>만 남겨주시면, 담당 공인중개사가 빠르게 전화를 드립니다.</p>
+              </div>
+
+              <div class="quick-form-card">
+                <div class="form-row-2">
+                  <div class="form-group-block">
+                    <label for="quick-name" class="block-label">성함 <span class="required">*</span></label>
+                    <input type="text" id="quick-name" required placeholder="예) 김철수">
+                  </div>
+                  <div class="form-group-block">
+                    <label for="quick-phone" class="block-label">연락처 <span class="required">*</span></label>
+                    <input type="tel" id="quick-phone" class="phone-input" required placeholder="010-0000-0000" maxlength="13">
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group-block">
+                    <label for="quick-category" class="block-label">관심 상담 분야</label>
+                    <select id="quick-category">
+                      <option value="아파트 매매/전세">아파트 매매 / 전세</option>
+                      <option value="광명뉴타운 재개발">광명뉴타운 재개발 / 입주권</option>
+                      <option value="상가/오피스텔 임대">상가 / 오피스텔 임대차</option>
+                      <option value="내 집 매도 의뢰">내 집 급매 / 매도 의뢰</option>
+                      <option value="중개보수/대출 상담">중개보수 / 대출 한도 상담</option>
+                    </select>
+                  </div>
+                  <div class="form-group-block">
+                    <label for="quick-call-time" class="block-label">통화 희망 시간대</label>
+                    <select id="quick-call-time">
+                      <option value="지금 바로 통화 가능">지금 바로 통화 가능 (10분 이내)</option>
+                      <option value="점심시간 (12:00 ~ 13:00)">점심시간 (12:00 ~ 13:00)</option>
+                      <option value="퇴근 후 (18:00 ~ 20:00)">퇴근 후 (18:00 ~ 20:00)</option>
+                      <option value="언제든 무관">언제든 연락 가능</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group-block">
+                  <label for="quick-simple-note" class="block-label">간단 문의 한마디 (선택)</label>
+                  <input type="text" id="quick-simple-note" placeholder="예) 철산래미안 33평 급매물 찾고 있습니다.">
+                </div>
+
+                <!-- Privacy Check -->
+                <div class="privacy-agreement-row">
+                  <label class="custom-checkbox-wrap">
+                    <input type="checkbox" id="quick-privacy" required checked>
+                    <span class="custom-checkmark"></span>
+                    <span class="privacy-text">개인정보 수집 및 이용 동의 <button type="button" class="btn-privacy-view">[전문 보기]</button></span>
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-inquiry-submit btn-quick-submit">
+                  <i class="fa-solid fa-phone-volume"></i> 10초 만에 전화 상담 신청하기
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ================= INQUIRY SUCCESS CONFIRMATION MODAL ================= -->
+  <div class="modal-overlay" id="inquiry-success-modal">
+    <div class="modal-content inquiry-receipt-modal">
+      <button class="modal-close-btn" id="inquiry-modal-close-btn">&times;</button>
+      <div class="receipt-header">
+        <div class="receipt-check-circle">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <span class="receipt-sub-badge">상담 신청 접수 완료</span>
+        <h3 class="receipt-title">소중한 문의가 정상 접수되었습니다!</h3>
+        <p class="receipt-desc">
+          광명리더스 대표 공인중개사가 내용을 검토 후<br>
+          <strong>10분 이내</strong>에 기재해주신 연락처로 친절히 연락드리겠습니다.
+        </p>
+      </div>
+
+      <div class="receipt-card">
+        <div class="receipt-row">
+          <span class="r-label">접수 번호</span>
+          <strong class="r-value highlight-num" id="receipt-id">GL-20261013-0000</strong>
+        </div>
+        <div class="receipt-row">
+          <span class="r-label">상담 구분</span>
+          <strong class="r-value" id="receipt-type">매물 구하기</strong>
+        </div>
+        <div class="receipt-row">
+          <span class="r-label">신청인 성함</span>
+          <strong class="r-value" id="receipt-name">홍길동 고객님</strong>
+        </div>
+        <div class="receipt-row">
+          <span class="r-label">연락처</span>
+          <strong class="r-value" id="receipt-phone">010-****-5678</strong>
+        </div>
+        <div class="receipt-row">
+          <span class="r-label">접수 일시</span>
+          <strong class="r-value" id="receipt-time">2026.10.13 15:30</strong>
+        </div>
+        <div class="receipt-row" id="receipt-email-row">
+          <span class="r-label">대표 이메일 알림</span>
+          <strong class="r-value" id="receipt-email-status" style="color: #059669; font-size: 0.82rem;"><i class="fa-solid fa-circle-check"></i> Resend 실시간 발송 완료</strong>
+        </div>
+      </div>
+
+      <div class="receipt-actions">
+        <a href="tel:01048208888" class="btn btn-receipt-call">
+          <i class="fa-solid fa-phone"></i> 지금 즉시 통화하기 (010-4820-8888)
+        </a>
+        <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="btn btn-receipt-kakao" id="btn-receipt-kakao-chat">
+          <i class="fa-solid fa-comments"></i> 1:1 카카오 오픈채팅방 바로 연결
+        </a>
+        <button type="button" class="btn btn-receipt-close" id="btn-receipt-confirm">
+          확인
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PRIVACY POLICY MODAL ================= -->
+  <div class="modal-overlay" id="privacy-policy-modal">
+    <div class="modal-content privacy-modal-content">
+      <button class="modal-close-btn" id="privacy-modal-close-btn">&times;</button>
+      <h3 class="privacy-modal-title"><i class="fa-solid fa-shield-halved"></i> 개인정보 수집 및 이용 동의 안내</h3>
+      <div class="privacy-modal-body">
+        <p><strong>1. 수집하는 개인정보 항목</strong></p>
+        <p>- 필수 항목: 성함, 연락처(휴대폰 번호), 상담 구분, 문의 내용</p>
+        <p><strong>2. 개인정보 수집 및 이용 목적</strong></p>
+        <p>- 광명리더스 공인중개사사무소의 부동산 매물 상담, 매도·임대 의뢰 접수, 방문 예약 일정 확인 및 고객 유선 회신</p>
+        <p><strong>3. 개인정보 보유 및 이용 기간</strong></p>
+        <p>- 상담 목적 달성 후 지체 없이 파기하며, 전자상거래법 등 관계 법령에 따라 최대 1년간 안전하게 보관 후 파기됩니다.</p>
+        <p><strong>4. 동의 거부 권리</strong></p>
+        <p>- 개인정보 수집에 동의를 거부하실 수 있으나, 미동의 시 온라인 상담 신청 및 전화 회신 서비스 이용이 제한될 수 있습니다.</p>
+      </div>
+      <button type="button" class="btn btn-primary w-100" id="btn-privacy-agree-confirm">동의 및 창 닫기</button>
+    </div>
+  </div>
+
+  <!-- ================= MY RECENT INQUIRIES MODAL ================= -->
+  <div class="modal-overlay" id="my-inquiries-modal">
+    <div class="modal-content history-modal-content">
+      <button class="modal-close-btn" id="history-modal-close-btn">&times;</button>
+      <h3 class="history-modal-title"><i class="fa-solid fa-clock-rotate-left"></i> 나의 최근 상담 신청 내역</h3>
+      <div id="history-list-container" class="history-list-box">
+        <!-- Rendered by JS -->
+      </div>
+      <button type="button" class="btn btn-outline w-100" id="btn-close-history-modal" style="margin-top:16px;">닫기</button>
+    </div>
+  </div>
 
   <!-- ================= LOCATION & MAP SECTION ================= -->
   <section class="section location-section">
@@ -670,9 +1161,23 @@
         </div>
       </div>
       <div class="kakao-header-actions">
+        <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="kakao-header-openchat-link" title="카카오톡 1:1 오픈채팅방 연결">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> 1:1 오픈톡
+        </a>
         <button id="kakao-chat-minimize" class="kakao-action-btn" title="최소화"><i class="fa-solid fa-minus"></i></button>
         <button id="kakao-chat-close" class="kakao-action-btn" title="닫기">&times;</button>
       </div>
+    </div>
+
+    <!-- Direct Open Chat Quick Action Banner -->
+    <div class="kakao-chat-announcement">
+      <div class="announcement-text">
+        <span class="openchat-badge">LIVE</span>
+        <span>대표 중개사와 실시간 1:1 직접 대화</span>
+      </div>
+      <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="btn-openchat-bubble">
+        <i class="fa-solid fa-comment-dots"></i> 오픈톡 입장
+      </a>
     </div>
 
     <!-- Chat Messages Container -->
@@ -689,17 +1194,23 @@
           <span class="sender-name">광명리더스 AI 비서</span>
           <div class="msg-bubble">
             안녕하세요! 🤖 <strong>광명리더스 24시간 AI 부동산 비서</strong>입니다.<br><br>
-            광명시 철산·하안·소하·일직동 아파트 시세, 추천 매물, 광명뉴타운 재개발, 복비 계산 등 원하시는 질문을 자유롭게 입력해 주세요!
+            광명시 철산·하안·소하·일직동 아파트 시세, 추천 매물, 광명뉴타운 재개발, 복비 계산 등 원하시는 질문을 자유롭게 입력해 주세요!<br><br>
+            💬 <strong>대표 공인중개사와 실시간 1:1 대화</strong>를 원하시면 언제든 아래 오픈채팅방으로 입장하실 수 있습니다:<br>
+            <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="chat-openchat-card-btn">
+              <i class="fa-solid fa-comment-dots"></i> 대표 중개사 1:1 오픈톡 바로가기 &rarr;
+            </a>
           </div>
           <span class="msg-time" id="init-msg-time">15:30</span>
 
           <!-- Quick Action Buttons -->
           <div class="quick-reply-chips" id="quick-reply-box">
+            <a href="https://open.kakao.com/o/s222zcSi" target="_blank" rel="noopener noreferrer" class="chip-btn chip-openchat-highlight">
+              <i class="fa-solid fa-comment-dots"></i> 💬 1:1 오픈채팅 연결
+            </a>
             <button class="chip-btn" data-query="인기 추천 매물 보여줘">🏢 인기 추천 매물</button>
             <button class="chip-btn" data-query="철산동 아파트 시세 알려줘">🏙️ 철산동 아파트 시세</button>
             <button class="chip-btn" data-query="광명뉴타운 재개발 현황">📈 광명뉴타운 재개발</button>
             <button class="chip-btn" data-query="중개보수 복비 계산 어떻게 하나요?">🧮 복비/대출 계산</button>
-            <button class="chip-btn" data-query="사무소 위치 및 주차 안내">🚗 위치 및 주차 안내</button>
             <button class="chip-btn" data-query="공인중개사 직접 전화 연결">📞 대표 중개사 연결</button>
           </div>
         </div>
@@ -729,6 +1240,6 @@
   </div>
 
   <!-- Custom JavaScript -->
-  <script src="script.js"></script>
+  <script src="script.js?v=20261013v6"></script>
 </body>
 </html>
